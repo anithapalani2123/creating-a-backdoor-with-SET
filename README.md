@@ -1,99 +1,57 @@
-# VALUE ITERATION ALGORITHM
+# creating-a-backdoor-with-SET
 
-## AIM
-To develop a Python program to find the optimal policy for the given MDP using the value iteration algorithm.
+##  AIM:
+To Create a backdoor with Social Engineering Toolkit (SET)
 
-## PROBLEM STATEMENT
-The FrozenLake environment in OpenAI Gym is a gridworld problem that challenges reinforcement learning agents to navigate a slippery terrain to reach a goal state while avoiding hazards. Note that the environment is closed with a fence, so the agent cannot leave the gridworld.
+## DESIGN STEPS:
+1) Install kali linux either in partition or virtual box or in live mode
+2) Investigate on the various categories of tools as follows:
+3) Open terminal and try execute some kali linux commands
 
-### States:
-* *5 Terminal States:*
-    * G - (Goal): The state the agent aims to reach.
-    * H - (Hole): A hazardous state that the agent must avoid at all costs.
+## EXECUTION STEPS AND ITS OUTPUT:
 
-* *11 Non-Terminal States:*
-    * S - (Starting state): The initial position of the agent.
-    * Intermediate states: Grid cells forming a layout that the agent must traverse.
+Social Engineering attacks are the various cons used by the hackers to trick people into providing sensitive data to the attackers. 
 
-### Actions:
-The agent can take 4 actions in each state:
+The command sudo setoolkit in the prompt gives menu with set prompt:
 
-* LEFT
-* RIGHT
-* UP
-* DOWN
+![image](https://github.com/Monisha-11/creating-a-backdoor-with-SET/assets/93427240/72911488-bd84-487d-b87b-fb13a107dd1e)
 
-### Transition Probabilities:
-The environment is stochastic, meaning that the outcome of an action is not always certain.
+It displays the following menu and select 2 for Website Attack Vectors:
 
-* 33.33% chance of moving in the intended direction.
-* 66.66% chance of moving in a orthogonal directions.
-This uncertainty adds complexity to the agent's navigation.
+![image](https://github.com/Monisha-11/creating-a-backdoor-with-SET/assets/93427240/0c19e322-a942-4cc1-99ed-b8455da43abf)
 
-### Rewards:
+The website Attack Vectors displays the following menu. In this menu3 for Credential Harvester Attack Method is selected:
 
-* +1 for reaching the goal state(G).
-* 0 reward for all other states, including the starting state (S) and intermediate states.
+![image](https://github.com/Monisha-11/creating-a-backdoor-with-SET/assets/93427240/9548d003-27a3-4509-bd8d-b38967e27fc3)
 
-### Episode Termination:
-The episode terminates when the agent reaches the goal state (G) or falls into a hole (H).
+The Credential Harvester Attack Method displays the following menu. In this menu1 for Web Templates is selected:
 
-### Graphical Representation:
-![image](https://github.com/Aashima02/rl-value-iteration/assets/93427086/2ef0a5f7-4c17-4366-82d1-364dd6fe79a4)
+![image](https://github.com/Monisha-11/creating-a-backdoor-with-SET/assets/93427240/a6760b9d-8632-47ce-b295-9699e54f3a33)
 
+It shows the following screen in which the ip address of the attacker need to be given which is the default value:
 
+![image](https://github.com/Monisha-11/creating-a-backdoor-with-SET/assets/93427240/ab2f001d-d317-48cd-acb5-9de51c191fdc)
 
-## POLICY ITERATION ALGORITHM
-* Value iteration is a method of computing an optimal MDP policy and its value.
-* It begins with an initial guess for the value function, and iteratively updates it towards the optimal value function, according to the Bellman optimality equation.
-* The algorithm is guaranteed to converge to the optimal value function, and in the process of doing so, also converges to the optimal policy.
+It shows the following screen in which the option Google can be selected:
 
-The algorithm is as follows:
+![image](https://github.com/Monisha-11/creating-a-backdoor-with-SET/assets/93427240/7c15a2f5-9da0-49cf-a269-d57e411f8539)
 
-1. Initialize the value function V(s) arbitrarily for all states s.
-2. Repeat until convergence:
-    * Initialize aaction-value function Q(s, a) arbitrarily for all states s and actions a.
-    * For all the states s and all the action a of every state:
-        * Update the action-value function Q(s, a) using the Bellman equation.
-        * Take the value function V(s) to be the maximum of Q(s, a) over all actions a.
-        * Check if the maximum difference between Old V and new V is less than theta.
-        * Where theta is a small positive number that determines the accuracy of estimation.
-3. If the maximum difference between Old V and new V is greater than theta, then
-    * Update the value function V with the maximum action-value from Q.
-    * Go to step 2.
-4. The optimal policy can be constructed by taking the argmax of the action-value function Q(s, a) over all actions a.
-5. Return the optimal policy and the optimal value function.
+SET starts my Kali Linux Webserver on port 80, with the fake Google account login page. The setup is done:
 
-## VALUE ITERATION FUNCTION
-python
-def value_iteration(P, gamma=1.0, theta=1e-10):
-    V = np.zeros(len(P), dtype=np.float64)
-    while True:
-      Q=np.zeros((len(P),len(P[0])),dtype=np.float64)
-      for s in range(len(P)):
-        for a in range(len(P[s])):
-          for prob,next_state,reward,done in P[s][a]:
-            Q[s][a]+=prob*(reward+gamma*V[next_state]*(not done))
-      if(np.max(np.abs(V-np.max(Q,axis=1))))<theta:
-        break
-      V=np.max(Q,axis=1)
-    pi=lambda s:{s:a for s , a in enumerate(np.argmax(Q,axis=1))}[s]
-    return V, pi
+![image](https://github.com/Monisha-11/creating-a-backdoor-with-SET/assets/93427240/fc3120cc-0342-4a95-b2a6-d1951daf3219)
 
+In windows IE, on giving the url http://192.168.1.2, the fake Google page is displayed. The victim can enter the username and password
 
-## OUTPUT:
-Mention the optimal policy, optimal value function , success rate for the optimal policy.
+![image](https://github.com/Monisha-11/creating-a-backdoor-with-SET/assets/93427240/1fb0bc90-0220-4dde-9aae-2cabc3873291)
 
-### Optimal Policy:
-![image](https://github.com/Aashima02/rl-value-iteration/assets/93427086/a6fe8ca5-a428-42d0-a9ef-eb54d2bc03ee)
+SET logs the information regarding the Google credentials:
 
-### Optimal Value Function:
-![image](https://github.com/Aashima02/rl-value-iteration/assets/93427086/07a12d6e-173b-4099-b665-0cec64fbf38e)
+![image](https://github.com/Monisha-11/creating-a-backdoor-with-SET/assets/93427240/9457e41a-31e2-48a7-88d0-7c71afb30367)
 
-### Success Rate for Optimal Policy:
-![image](https://github.com/Aashima02/rl-value-iteration/assets/93427086/e7df5ab6-47c8-4c57-97f9-4bd58b4ea95b)
+SET logs the information in the xml file under /root/.set directory:
+
+![image](https://github.com/Monisha-11/creating-a-backdoor-with-SET/assets/93427240/3c288818-d232-4d31-b09f-a1db311cbd94)
 
 
 ## RESULT:
-
-Thus, a Python program is developed to find the optimal policy for the given MDP using the value iteration algorithm.
+The Social Engineering Toolkit (SET) is used to create backdoor is  examined successfully
